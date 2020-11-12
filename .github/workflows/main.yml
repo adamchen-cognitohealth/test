@@ -41,6 +41,5 @@ jobs:
         uses: rtCamp/action-slack-notify@master
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_CHANNEL: adam.chen
         with:
           args: 'A new commit has been pushed.'
