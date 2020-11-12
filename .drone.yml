@@ -25,7 +25,7 @@ steps:
   - name: slack
     image: plugins/slack
     settings:
-      webhook: https://hooks.slack.com/services/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
+      webhook: https://hooks.slack.com/services/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
       username: adam.chen
       template: >
         build {{build.number}} succeeded. Good job.
