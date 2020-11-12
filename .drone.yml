@@ -28,15 +28,7 @@ steps:
       webhook: https://hooks.slack.com/services/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
       username: adam.chen
       template: >
-        *{{#success build.status}}✔{{ else }}✘{{/success}} {{ uppercasefirst build.status }}: Build #{{ build.number }}* (type: `{{ build.event }}`)
-
-        Commit: <http://192.168.11.84:3000/{{ repo.owner }}/{{ repo.name }}/commit/{{ build.commit }}|{{ truncate build.commit 8 }}>
-
-        Branch: <http://192.168.11.84:3000/{{ repo.owner }}/{{ repo.name }}/commits/{{ build.branch }}|{{ build.branch }}>
-
-        Author: {{ build.author }}
-
-        <{{ build.link }}|Visit build page ↗>
+        build {{build.number}} succeeded. Good job.
     when:
       status: [ success, failure ]
 
