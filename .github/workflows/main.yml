@@ -35,3 +35,11 @@ jobs:
       - name: Run test
         run: |
           python -m unittest discover
+
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@master
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_CHANNEL: adam.chen
+        with:
+          args: 'A new commit has been pushed.'
