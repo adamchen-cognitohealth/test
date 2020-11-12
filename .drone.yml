@@ -25,7 +25,7 @@ steps:
   - name: slack
     image: plugins/slack
     settings:
-      webhook: https://hooks.slack.com/services/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
+      webhook: https://hooks.slack.com/services/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
       username: adam.chen
       template: >
         *{{#success build.status}}✔{{ else }}✘{{/success}} {{ uppercasefirst build.status }}: Build #{{ build.number }}* (type: `{{ build.event }}`)
