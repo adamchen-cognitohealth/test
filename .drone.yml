@@ -1,0 +1,48 @@
+---
+################
+# Build & Test #
+################
+
+kind: pipeline
+name: run_tests
+
+platform:
+  arch: amd64
+  os: linux
+
+steps:
+  - name: backend
+    image: golang
+    commands:
+      - echo "backend testing"
+
+  - name: test
+    image: python:3.4
+    commands:
+      - echo $(which python)
+      - python -m unittest discover
+
+  - name: slack
+    image: plugins/slack
+    settings:
+      webhook: https://hooks.slack.com/services/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
+      username: adam.chen
+      template: >
+        *{{#success build.status}}✔{{ else }}✘{{/success}} {{ uppercasefirst build.status }}: Build #{{ build.number }}* (type: `{{ build.event }}`)
+
+        Commit: <http://192.168.11.84:3000/{{ repo.owner }}/{{ repo.name }}/commit/{{ build.commit }}|{{ truncate build.commit 8 }}>
+
+        Branch: <http://192.168.11.84:3000/{{ repo.owner }}/{{ repo.name }}/commits/{{ build.branch }}|{{ build.branch }}>
+
+        Author: {{ build.author }}
+
+        <{{ build.link }}|Visit build page ↗>
+    when:
+      status: [ success, failure ]
+
+  - name: deploy
+    image: alpine
+    commands:
+      - echo "deploy"
+    when:
+      status: [ success ]
