@@ -1,3 +1,3 @@
 def gg():
   print("gg")
-  return 2
+  return 1
